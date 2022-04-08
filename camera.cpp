@@ -132,8 +132,6 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
 
     m_mediaRecorder->setMetaData(QMediaMetaData::Title, QVariant(QLatin1String("Test Title")));
 
-    connect(ui->exposureCompensation, &QAbstractSlider::valueChanged, this, &Camera::setExposureCompensation);
-
     m_camera->setViewfinder(ui->viewfinder);
 
     updateCameraState(m_camera->state());
@@ -322,23 +320,16 @@ void Camera::updateLockStatus(QCamera::LockStatus status, QCamera::LockChangeRea
     case QCamera::Searching:
         indicationColor = Qt::yellow;
         ui->statusbar->showMessage(tr("Focusing..."));
-        ui->lockButton->setText(tr("Focusing..."));
         break;
     case QCamera::Locked:
         indicationColor = Qt::darkGreen;
-        ui->lockButton->setText(tr("Unlock"));
         ui->statusbar->showMessage(tr("Focused"), 2000);
         break;
     case QCamera::Unlocked:
         indicationColor = reason == QCamera::LockFailed ? Qt::red : Qt::black;
-        ui->lockButton->setText(tr("Focus"));
         if (reason == QCamera::LockFailed)
             ui->statusbar->showMessage(tr("Focus Failed"), 2000);
     }
-
-    QPalette palette = ui->lockButton->palette();
-    palette.setColor(QPalette::ButtonText, indicationColor);
-    ui->lockButton->setPalette(palette);
 }
 
 void Camera::takeImage()
@@ -405,23 +396,7 @@ void Camera::updateCameraState(QCamera::State state)
 
 void Camera::updateRecorderState(QMediaRecorder::State state)
 {
-    switch (state) {
-    case QMediaRecorder::StoppedState:
-        ui->recordButton->setEnabled(true);
-        ui->pauseButton->setEnabled(true);
-        ui->stopButton->setEnabled(false);
-        break;
-    case QMediaRecorder::PausedState:
-        ui->recordButton->setEnabled(true);
-        ui->pauseButton->setEnabled(false);
-        ui->stopButton->setEnabled(true);
-        break;
-    case QMediaRecorder::RecordingState:
-        ui->recordButton->setEnabled(false);
-        ui->pauseButton->setEnabled(true);
-        ui->stopButton->setEnabled(true);
-        break;
-    }
+
 }
 
 void Camera::setExposureCompensation(int index)
@@ -456,7 +431,6 @@ void Camera::displayCapturedImage()
 
 void Camera::readyForCapture(bool ready)
 {
-    ui->takeImageButton->setEnabled(ready);
 }
 
 void Camera::imageSaved(int id, const QString &fileName)
