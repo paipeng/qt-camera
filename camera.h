@@ -127,6 +127,7 @@ private:
     QString m_videoContainerFormat;
     bool m_isCapturingImage = false;
     bool m_applicationExiting = false;
+    bool m_isCameraStart = false;
 };
 
 #endif

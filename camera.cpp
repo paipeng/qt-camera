@@ -141,7 +141,7 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
 
     connect(m_imageCapture.data(), &QCameraImageCapture::readyForCaptureChanged, this, &Camera::readyForCapture);
     connect(m_imageCapture.data(), &QCameraImageCapture::imageCaptured, this, &Camera::processCapturedImage);
-    connect(m_imageCapture.data(), &QCameraImageCapture::imageSaved, this, &Camera::imageSaved);
+    //connect(m_imageCapture.data(), &QCameraImageCapture::imageSaved, this, &Camera::imageSaved);
     connect(m_imageCapture.data(), QOverload<int, QCameraImageCapture::Error, const QString &>::of(&QCameraImageCapture::error),
             this, &Camera::displayCaptureError);
 
@@ -152,7 +152,7 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
     ui->captureWidget->setTabEnabled(1, (m_camera->isCaptureModeSupported(QCamera::CaptureVideo)));
 
     updateCaptureMode();
-    m_camera->start();
+    //m_camera->start();
 }
 
 void Camera::keyPressEvent(QKeyEvent * event)
@@ -205,6 +205,7 @@ void Camera::updateRecordTime()
 void Camera::processCapturedImage(int requestId, const QImage& img)
 {
     Q_UNUSED(requestId);
+#if 0
     QImage scaledImage = img.scaled(ui->viewfinder->size(),
                                     Qt::KeepAspectRatio,
                                     Qt::SmoothTransformation);
@@ -214,6 +215,18 @@ void Camera::processCapturedImage(int requestId, const QImage& img)
     // Display captured image for 4 seconds.
     displayCapturedImage();
     QTimer::singleShot(4000, this, &Camera::displayViewfinder);
+#else
+    qDebug("processCapturedImage");
+    // detect&decode
+    // show result
+    // capture next image
+    if (this->m_isCapturingImage) {
+        qDebug("continue capture");
+        //m_imageCapture->capture();
+    }
+
+
+#endif
 }
 
 void Camera::configureCaptureSettings()
@@ -343,7 +356,16 @@ void Camera::displayCaptureError(int id, const QCameraImageCapture::Error error,
 
 void Camera::startCamera()
 {
-    m_camera->start();
+    qDebug("startCamera: %d", m_isCameraStart);
+    if (m_isCameraStart) {
+        m_camera->stop();
+        ui->cameraButton->setText("Start");
+    } else {
+        m_camera->start();
+        ui->cameraButton->setText("Stop");
+    }
+    m_isCameraStart = !m_isCameraStart;
+    qDebug("startCamera end: %d", m_isCameraStart);
 }
 
 void Camera::stopCamera()
@@ -439,7 +461,9 @@ void Camera::imageSaved(int id, const QString &fileName)
     Q_UNUSED(id);
     ui->statusbar->showMessage(tr("Captured \"%1\"").arg(QDir::toNativeSeparators(fileName)));
 
+    qDebug("imageSaved: %s", (const char*)(fileName.data()));
     m_isCapturingImage = false;
+
     if (m_applicationExiting)
         close();
 }
