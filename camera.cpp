@@ -150,8 +150,8 @@ void Camera::setCamera(const QCameraInfo &cameraInfo)
     connect(m_camera.data(), QOverload<QCamera::LockStatus, QCamera::LockChangeReason>::of(&QCamera::lockStatusChanged),
             this, &Camera::updateLockStatus);
 
-    ui->captureWidget->setTabEnabled(0, (m_camera->isCaptureModeSupported(QCamera::CaptureStillImage)));
-    ui->captureWidget->setTabEnabled(1, (m_camera->isCaptureModeSupported(QCamera::CaptureVideo)));
+    //ui->captureWidget->setTabEnabled(0, true);
+    //ui->captureWidget->setTabEnabled(1, true);
 
     updateCaptureMode();
     //m_camera->start();
@@ -392,8 +392,8 @@ void Camera::updateCameraState(QCamera::State state)
     case QCamera::LoadedState:
         ui->actionStartCamera->setEnabled(true);
         ui->actionStopCamera->setEnabled(false);
-        ui->captureWidget->setEnabled(false);
-        ui->actionSettings->setEnabled(false);
+        ui->captureWidget->setEnabled(true);
+        ui->actionSettings->setEnabled(true);
     }
 }
 
