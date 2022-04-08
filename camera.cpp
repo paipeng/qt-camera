@@ -75,20 +75,27 @@ Camera::Camera() : ui(new Ui::Camera)
     QActionGroup *videoDevicesGroup = new QActionGroup(this);
     videoDevicesGroup->setExclusive(true);
     const QList<QCameraInfo> availableCameras = QCameraInfo::availableCameras();
+    QCameraInfo defaultCameraInfo;
     for (const QCameraInfo &cameraInfo : availableCameras) {
         QAction *videoDeviceAction = new QAction(cameraInfo.description(), videoDevicesGroup);
         videoDeviceAction->setCheckable(true);
         videoDeviceAction->setData(QVariant::fromValue(cameraInfo));
+        if (cameraInfo.description() == "USB2.0 UVC PC Camera") {
+            defaultCameraInfo = cameraInfo;
+        }
         if (cameraInfo == QCameraInfo::defaultCamera())
             videoDeviceAction->setChecked(true);
 
         ui->menuDevices->addAction(videoDeviceAction);
     }
 
+    if (defaultCameraInfo.isNull()) {
+        defaultCameraInfo = QCameraInfo::defaultCamera();
+    }
     connect(videoDevicesGroup, &QActionGroup::triggered, this, &Camera::updateCameraDevice);
     connect(ui->captureWidget, &QTabWidget::currentChanged, this, &Camera::updateCaptureMode);
 
-    setCamera(QCameraInfo::defaultCamera());
+    setCamera(defaultCameraInfo);
 }
 
 void Camera::setCamera(const QCameraInfo &cameraInfo)
