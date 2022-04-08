@@ -112,6 +112,9 @@ Camera::Camera() : ui(new Ui::Camera)
 
     setCamera(defaultCameraInfo);
     displayCapturedImage();
+
+
+    ui->statusbar->showMessage(tr("QT Camera ready..."));
 }
 
 void Camera::setCamera(const QCameraInfo &cameraInfo)
