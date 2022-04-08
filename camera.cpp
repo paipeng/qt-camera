@@ -65,6 +65,8 @@
 #include <QtWidgets>
 #include<QDebug>
 
+#define DEFAULT_CAMERA_DEVICE "USB2.0 UVC PC Camera"
+
 Q_DECLARE_METATYPE(QCameraInfo)
 
 Camera::Camera() : ui(new Ui::Camera)
@@ -82,8 +84,8 @@ Camera::Camera() : ui(new Ui::Camera)
         videoDeviceAction->setCheckable(true);
         videoDeviceAction->setData(QVariant::fromValue(cameraInfo));
 
-        if (cameraInfo.description() == "USB2.0 UVC PC Camera") {
-            qDebug( "USB2.0 UVC PC Camera found" );
+        if (cameraInfo.description() == DEFAULT_CAMERA_DEVICE) {
+            qDebug( "%s found", DEFAULT_CAMERA_DEVICE );
             defaultCameraInfo = cameraInfo;
         }
         if (cameraInfo == QCameraInfo::defaultCamera())
