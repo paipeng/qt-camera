@@ -1,2 +1,2 @@
-# qtwebcam
-QT Webcam Camera Startup
+# qt-camera
+QT USB Camera
