@@ -31,7 +31,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="saveButton">
         <property name="maximumSize">
          <size>
           <width>100</width>
@@ -39,7 +39,7 @@
          </size>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>Save</string>
         </property>
        </widget>
       </item>
@@ -267,6 +267,9 @@
           </property>
           <property name="text">
            <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="camera.qrc">:/images/logo.png</pixmap>
           </property>
          </widget>
         </item>

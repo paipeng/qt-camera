@@ -111,6 +111,7 @@ Camera::Camera() : ui(new Ui::Camera)
     connect(ui->captureWidget, &QTabWidget::currentChanged, this, &Camera::updateCaptureMode);
 
     setCamera(defaultCameraInfo);
+    displayCapturedImage();
 }
 
 void Camera::setCamera(const QCameraInfo &cameraInfo)
@@ -360,9 +361,11 @@ void Camera::startCamera()
     if (m_isCameraStart) {
         m_camera->stop();
         ui->cameraButton->setText("Start");
+        displayCapturedImage();
     } else {
         m_camera->start();
         ui->cameraButton->setText("Stop");
+        displayViewfinder();
     }
     m_isCameraStart = !m_isCameraStart;
     qDebug("startCamera end: %d", m_isCameraStart);

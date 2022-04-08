@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>images/shutter.svg</file>
         <file>images/header.png</file>
+        <file>images/logo.png</file>
     </qresource>
 </RCC>
