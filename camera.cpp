@@ -63,7 +63,8 @@
 #include <QPalette>
 
 #include <QtWidgets>
-#include<QDebug>
+#include <QDebug>
+#include <QPixmap>
 
 #define DEFAULT_CAMERA_DEVICE "USB2.0 UVC PC Camera"
 
@@ -72,6 +73,8 @@ Q_DECLARE_METATYPE(QCameraInfo)
 Camera::Camera() : ui(new Ui::Camera)
 {
     ui->setupUi(this);
+
+    ui->headerLabel->setScaledContents(true);
 
     //Camera devices:
 
