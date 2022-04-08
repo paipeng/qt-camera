@@ -6,53 +6,35 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>855</width>
-    <height>757</height>
+    <width>900</width>
+    <height>699</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>900</width>
+    <height>699</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Camera</string>
+   <string>QT Camera</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="maximumSize">
+    <size>
+     <width>900</width>
+     <height>700</height>
+    </size>
+   </property>
    <layout class="QGridLayout" name="gridLayout_3">
-    <item row="2" column="0" colspan="2">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="cameraButton">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="saveButton">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>300</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Save</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
     <item row="1" column="1" colspan="3">
      <widget class="QTabWidget" name="captureWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="decodeWidget">
        <attribute name="title">
-        <string>Image</string>
+        <string>解码信息</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout"/>
       </widget>
@@ -71,6 +53,18 @@
         <horstretch>1</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>640</width>
+        <height>480</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>640</width>
+        <height>480</height>
+       </size>
       </property>
       <property name="palette">
        <palette>
@@ -140,13 +134,32 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="viewfinderPage">
+       <property name="maximumSize">
+        <size>
+         <width>640</width>
+         <height>480</height>
+        </size>
+       </property>
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
-         <widget class="QCameraViewfinder" name="viewfinder" native="true"/>
+         <widget class="QCameraViewfinder" name="viewfinder" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>640</width>
+            <height>480</height>
+           </size>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
       <widget class="QWidget" name="previewPage">
+       <property name="maximumSize">
+        <size>
+         <width>640</width>
+         <height>480</height>
+        </size>
+       </property>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
          <widget class="QLabel" name="lastImagePreviewLabel">
@@ -155,6 +168,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>640</width>
+            <height>480</height>
+           </size>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -173,13 +192,52 @@
     </item>
     <item row="0" column="0" colspan="4">
      <widget class="QLabel" name="headerLabel">
+      <property name="maximumSize">
+       <size>
+        <width>900</width>
+        <height>100</height>
+       </size>
+      </property>
       <property name="text">
        <string/>
       </property>
       <property name="pixmap">
        <pixmap resource="camera.qrc">:/images/header.png</pixmap>
       </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
      </widget>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cameraButton">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Start</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="saveButton">
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -188,7 +246,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>855</width>
+     <width>900</width>
      <height>24</height>
     </rect>
    </property>
